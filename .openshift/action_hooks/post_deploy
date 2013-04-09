@@ -2,3 +2,6 @@
 # This is a simple post deploy hook executed after your application 
 # is deployed and started.  This script gets executed directly, so 
 # it could be python, php, ruby, etc.
+
+if [ -f $OPENSHIFT_DATA_DIR/.schema_deployed ]; then exit 0; fi
+psql -h$OPENSHIFT_POSTGRESQL_DB_HOST -U$OPENSHIFT_POSTGRESQL_DB_USERNAME $WOPENSHIFT_POSTGRESQL_DB_PASSWORD -f$OPENSHIFT_REPO_DIR/php/schema/ttrss_schema_pgsql.sql $OPENSHIFT_APP_NAME && touch $OPENSHIFT_DATA_DIR/.schema_deployed
