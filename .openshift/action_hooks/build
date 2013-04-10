@@ -3,3 +3,7 @@
 # available.  Otherwise it will execute while your application is stopped
 # before the deploy step.  This script gets executed directly, so it
 # could be python, php, ruby, etc.
+if [ -f ${OPENSHIFT_REPO_DIR}/php/config.php ]; then
+    exit 0
+fi
+cp ${OPENSHIFT_REPO_DIR}/.openshift/config.php ${OPENSHIFT_REPO_DIR}/php/config.php
