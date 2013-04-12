@@ -3,27 +3,32 @@ https://github.com/fabianofranz/tiny_tiny_rss-openshift-quickstart
 
 Once the upstream bug is fixed, this will be much simpler. (--from-code doesn't work as expected.)
 
+Creating an Openshift TT-RSS app:
+=================================
+
 To create an Openshift TT-RSS instance:
-$ rhc app create ttrss php-5.3 postgresql-8.4
-(Feel free to replace 'ttrss' with a different name.)
-Application Options
--------------------
-  Namespace:  spaces
-  Cartridges: php-5.3, postgresql-8.4
-  Gear Size:  default
-  Scaling:    no
+    $ rhc app create ttrss php-5.3 postgresql-8.4
+    **(Feel free to replace 'ttrss' with a different name.)**
+    Application Options
+    -------------------
+      Namespace:  spaces
+      Cartridges: php-5.3, postgresql-8.4
+      Gear Size:  default
+      Scaling:    no
+    
+    Creating application 'ttrss' ... done
+    **...output snipped...**
+    $ cd ttrss
+    **Add my repository as 'upstream' and overwrite the blank template:**
+    $ git remote add upstream -m master https://github.com/disconn3ct/tiny_tiny_rss-openshift-quickstart.git
+    $ git pull -s recursive -X theirs upstream master
+    **...git output snipped...**
+    Update the app with the new code:
+    $ git push
+    ...TTRSS will be installed...
 
-Creating application 'ttrss' ... done
-...output snipped...
-$ cd ttrss
-Add my repository as 'upstream' and overwrite the blank template:
-$ git remote add upstream -m master https://github.com/disconn3ct/tiny_tiny_rss-openshift-quickstart.git
-$ git pull -s recursive -X theirs upstream master
-...git output snipped...
-Update the app with the new code:
-$ git push
-...TTRSS will be installed...
-
+Updating the app:
+=================
 To update, just use "git pull upstream master" and "git push".
 
 Repo layout
