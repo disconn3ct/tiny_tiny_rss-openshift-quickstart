@@ -7,6 +7,7 @@ Creating an Openshift TT-RSS app:
 =================================
 
 To create an Openshift TT-RSS instance:
+
     $ rhc app create ttrss php-5.3 postgresql-8.4
     **(Feel free to replace 'ttrss' with a different name.)**
     Application Options
@@ -33,10 +34,8 @@ To update, just use "git pull upstream master" and "git push".
 
 Repo layout
 ===========
-php/ - A submodule including a fork of the upstream TTRSS code. (The fork
-       exists to allow for a config.php and the mobile submodule.)
-php/mobile - Submodule holding the mobile plugin from
-             https://github.com/mboinet/ttrss-mobile
-libs/ - Additional libraries
-misc/ - For PHP code that should not be accessible by end users
+* php/ - A submodule including a fork of the upstream TTRSS code. (The fork exists to allow for a config.php and the mobile submodule.)
+* php/mobile - Submodule holding the mobile plugin from https://github.com/mboinet/ttrss-mobile
+* libs/ - Additional libraries
+* misc/ - For PHP code that should not be accessible by end users
 
