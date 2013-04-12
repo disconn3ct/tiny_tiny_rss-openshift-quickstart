@@ -24,7 +24,7 @@ Update the app with the new code:
 $ git push
 ...TTRSS will be installed...
 
-To update, just use "git pull" as normal.
+To update, just use "git pull upstream master" and "git push".
 
 Repo layout
 ===========
