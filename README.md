@@ -8,7 +8,7 @@ Creating an Openshift TT-RSS app:
 
 To create an Openshift TT-RSS instance:
 
-    $ rhc app create ttrss php-5.3 postgresql-8.4
+    $ rhc app create ttrss php-5.3 postgresql-8.4 cron-1.4
     **(Feel free to replace 'ttrss' with a different name.)**
     Application Options
     -------------------
