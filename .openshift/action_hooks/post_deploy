@@ -10,4 +10,6 @@ fi
 psql -h${OPENSHIFT_POSTGRESQL_DB_HOST} -U${OPENSHIFT_POSTGRESQL_DB_USERNAME} ${WOPENSHIFT_POSTGRESQL_DB_PASSWORD} -f${OPENSHIFT_REPO_DIR}/php/schema/ttrss_schema_pgsql.sql ${OPENSHIFT_APP_NAME} || exit 1
 date >> ${OPENSHIFT_DATA_DIR}/.schema_deployed
 echo "Schema deployed successfully."
+# Update g2m
+git clone https://github.com/g2ttrss/g2ttrss-mobile.git ${OPENSHIFT_REPO_DIR}/php/g2m
 exit 0
