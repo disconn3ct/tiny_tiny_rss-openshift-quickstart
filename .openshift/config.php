@@ -18,7 +18,7 @@
 	// *** Basic settings (important!) ***
 	// ***********************************
 
-	define('SELF_URL_PATH', 'http://'.getenv('OPENSHIFT_APP_DNS'));
+	define('SELF_URL_PATH', 'https://'.getenv('OPENSHIFT_APP_DNS'));
 	// Full URL of your tt-rss installation. This should be set to the
 	// location of tt-rss directory, e.g. http://yourserver/tt-rss/
 	// You need to set this option correctly otherwise several features
@@ -85,11 +85,11 @@
 
 	// *** PubSubHubbub settings ***
 
-	define('PUBSUBHUBBUB_HUB', '');
+	define('PUBSUBHUBBUB_HUB', 'http://pubsubhubbub.appspot.com/');
 	// URL to a PubSubHubbub-compatible hub server. If defined, "Published
 	// articles" generated feed would automatically become PUSH-enabled.
 
-	define('PUBSUBHUBBUB_ENABLED', false);
+	define('PUBSUBHUBBUB_ENABLED', true);
 	// Enable client PubSubHubbub support in tt-rss. When disabled, tt-rss
 	// won't try to subscribe to PUSH feed updates.
 
@@ -146,7 +146,7 @@
 	// *********************************
 
 	define('SMTP_FROM_NAME', 'Tiny Tiny RSS');
-	define('SMTP_FROM_ADDRESS', 'noreply@your.domain.dom');
+	define('SMTP_FROM_ADDRESS', 'noreply@'.getenv('OPENSHIFT_APP_DNS'));
 	// Name, address and subject for sending outgoing mail. This applies
 	// to password reset notifications, digest emails and any other mail.
 
@@ -171,7 +171,7 @@
 	define('CHECK_FOR_NEW_VERSION', true);
 	// Check for new versions of tt-rss automatically.
 
-	define('ENABLE_GZIP_OUTPUT', false);
+	define('ENABLE_GZIP_OUTPUT', true);
 	// Selectively gzip output to improve wire performance. This requires
 	// PHP Zlib extension on the server.
 	// Enabling this can break tt-rss in several httpd/php configurations,
