@@ -10,5 +10,6 @@ cp ${OPENSHIFT_REPO_DIR}/.openshift/config.php ${OPENSHIFT_REPO_DIR}/php/config.
 # Set up sphinx full-text search
 mkdir -p ${OPENSHIFT_DATA_DIR}/run
 mkdir -p ${OPENSHIFT_DATA_DIR}/sphinx/var/data
+mkdir -p ${OPENSHIFT_DATA_DIR}/sphinx/etc
 ${OPENSHIFT_REPO_DIR}/misc/sed-sphinx.sh > ${OPENSHIFT_DATA_DIR}/sphinx/etc/sphinx.conf
 
