@@ -1,0 +1,2 @@
+#!/bin/sh
+${OPENSHIFT_REPO_DIR}/sphinx/bin/indexer --rotate --config ${OPENSHIFT_DATA_DIR}/sphinx/etc/sphinx.conf delta &> /dev/null

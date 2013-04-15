@@ -97,11 +97,11 @@
 	// *** Sphinx search ***
 	// *********************
 
-	define('SPHINX_ENABLED', false);
+	define('SPHINX_ENABLED', true);
 	// Enable fulltext search using Sphinx (http://www.sphinxsearch.com)
 	// Please see http://tt-rss.org/wiki/SphinxSearch for more information.
 
-	define('SPHINX_INDEX', 'ttrss');
+	define('SPHINX_INDEX', getenv('OPENSHIFT_APP_NAME'));
 	// Index name in Sphinx configuration. You can specify multiple indexes
 	// as a comma-separated string.
 
