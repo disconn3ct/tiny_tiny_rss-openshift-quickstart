@@ -12,4 +12,6 @@ mkdir -p ${OPENSHIFT_DATA_DIR}/run
 mkdir -p ${OPENSHIFT_DATA_DIR}/sphinx/var/data
 mkdir -p ${OPENSHIFT_DATA_DIR}/sphinx/etc
 ${OPENSHIFT_REPO_DIR}/misc/sed-sphinx.sh > ${OPENSHIFT_DATA_DIR}/sphinx/etc/sphinx.conf
+# Initialize the search repo
+${OPENSHIFT_REPO_DIR}/.openshift/cron/daily/sphinx
 
