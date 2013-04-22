@@ -1,12 +1,12 @@
-This is a quickstart for Tiny Tiny RSS, based loosely off of 
-https://github.com/fabianofranz/tiny_tiny_rss-openshift-quickstart
+This is an OpenShift quickstart for Tiny Tiny RSS.
 
-Once the upstream bug is fixed, this will be much simpler. (--from-code doesn't work as expected.)
+Once [the upstream bug](https://bugzilla.redhat.com/show_bug.cgi?id=950731) is fixed, this will be much simpler.
 
 Creating an Openshift TT-RSS app:
 =================================
 
-To create an Openshift TT-RSS instance: **(Feel free to replace 'ttrss' with a different name.)**
+To create an Openshift TT-RSS instance: 
+**Feel free to replace 'ttrss' with a different name.**
 
     $ rhc app create ttrss php-5.3 postgresql-8.4 cron-1.4
     Application Options
@@ -43,6 +43,7 @@ TTRSS will be installed, with a lot of output (but hopefully no errors.)
 Updating the app:
 =================
 To update, just run:
+**If you used the sphinx branch, use that here instead of 'master'**
 
     $ git pull upstream master
     $ git push
