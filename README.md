@@ -6,10 +6,9 @@ Once the upstream bug is fixed, this will be much simpler. (--from-code doesn't 
 Creating an Openshift TT-RSS app:
 =================================
 
-To create an Openshift TT-RSS instance:
+To create an Openshift TT-RSS instance: **(Feel free to replace 'ttrss' with a different name.)**
 
     $ rhc app create ttrss php-5.3 postgresql-8.4 cron-1.4
-    **(Feel free to replace 'ttrss' with a different name.)**
     Application Options
     -------------------
       Namespace:  spaces
@@ -18,24 +17,32 @@ To create an Openshift TT-RSS instance:
       Scaling:    no
     
     Creating application 'ttrss' ... done
-    **...output snipped...**
+    ...
     $ cd ttrss
-    **Add my repository as 'upstream' and overwrite the blank template:**
+    
+Add my repository as 'upstream':
+
     $ git remote add upstream -m master https://github.com/disconn3ct/tiny_tiny_rss-openshift-quickstart.git
+
+The next step is to overwrite the default template. You have two choices.
+
+To use the latest stable code (currently 1.7.8):
+
     $ git pull -s recursive -X theirs upstream master
-    **...git output snipped...**
-    Update the app with the new code:
+
+If you prefer to use the most up-to-date code (2012-04-22) with the Sphinx search engine:
+
+    $ git pull -s recursive -X theirs upstream sphinx
+
+Update the app with the new code:
+
     $ git push
-    ...TTRSS will be installed...
+
+TTRSS will be installed, with a lot of output (but hopefully no errors.)
 
 Updating the app:
 =================
-To update, just use "git pull upstream master" and "git push".
+To update, just run:
 
-Repo layout
-===========
-* php/ - A submodule including a fork of the upstream TTRSS code. (The fork exists to allow for a config.php and the mobile submodule.)
-* php/mobile - Submodule holding the mobile plugin from https://github.com/mboinet/ttrss-mobile
-* libs/ - Additional libraries
-* misc/ - For PHP code that should not be accessible by end users
-
+    $ git pull upstream master
+    $ git push
