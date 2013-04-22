@@ -6,7 +6,7 @@
 if [ -f ${OPENSHIFT_REPO_DIR}/php/config.php ]; then
     exit 0
 fi
-cp ${OPENSHIFT_REPO_DIR}/.openshift/config.php ${OPENSHIFT_REPO_DIR}/php/config.php
+cp ${OPENSHIFT_REPO_DIR}/misc/config.php ${OPENSHIFT_REPO_DIR}/php/config.php
 # Set up sphinx full-text search
 mkdir -p ${OPENSHIFT_DATA_DIR}/run
 mkdir -p ${OPENSHIFT_DATA_DIR}/sphinx/var/data
