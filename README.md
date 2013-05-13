@@ -21,15 +21,13 @@ To create an Openshift TT-RSS instance:
     ...
     $ cd ttrss
     
-You now have two choices. For the latest release version of TTRSS, use the **master** branch. For bleeding-edge HEAD code, with Sphinx searching included, use the **sphinx** branch.
-
 Add my repository as 'upstream':
 
-    $ git remote add upstream -m BRANCH https://github.com/disconn3ct/tiny_tiny_rss-openshift-quickstart.git
+    $ git remote add upstream -m master https://github.com/disconn3ct/tiny_tiny_rss-openshift-quickstart.git
 
 The next step is to overwrite the default application template:
 
-    $ git pull -s recursive -X theirs upstream BRANCH
+    $ git pull -s recursive -X theirs upstream master
 
 Update the app with the new code:
 
@@ -40,7 +38,6 @@ TTRSS will be installed, with a lot of output (but hopefully no errors.)
 Updating the app:
 =================
 To update, just run a pull:
-**Be sure to use the correct banch!**
 
-    $ git pull upstream BRANCH
+    $ git pull upstream master
     $ git push
