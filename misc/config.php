@@ -109,7 +109,7 @@
 	// Please see http://tt-rss.org/wiki/SphinxSearch for more information.
 
     define('SPHINX_SERVER', getenv('OPENSHIFT_INTERNAL_IP').":15000");
-    // Hostname:port combination for the Sphinx server.                     
+	// Hostname:port combination for the Sphinx server.
 
 	define('SPHINX_INDEX', getenv('OPENSHIFT_APP_NAME'));
 	// Index name in Sphinx configuration. You can specify multiple indexes
