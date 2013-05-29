@@ -13,4 +13,4 @@ fi
 # Initialize the search repo
 ${OPENSHIFT_REPO_DIR}/.openshift/cron/daily/sphinx
 ${OPENSHIFT_REPO_DIR}/.openshift/cron/hourly/sphinx
-
+exit 0
