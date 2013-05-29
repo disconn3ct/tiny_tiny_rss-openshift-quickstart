@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -ex
 # Deploy: Just before starting the application
 # Ensure db exists
 
