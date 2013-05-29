@@ -11,8 +11,6 @@ cp ${OPENSHIFT_REPO_DIR}/misc/config.php ${OPENSHIFT_REPO_DIR}/php/config.php
 mkdir -p ${OPENSHIFT_DATA_DIR}/run
 mkdir -p ${OPENSHIFT_DATA_DIR}/sphinx/var/data
 mkdir -p ${OPENSHIFT_DATA_DIR}/sphinx/etc
+# Configure sphinx for current instance
 ${OPENSHIFT_REPO_DIR}/misc/sed-sphinx.sh > ${OPENSHIFT_DATA_DIR}/sphinx/etc/sphinx.conf
-# Initialize the search repo
-${OPENSHIFT_REPO_DIR}/.openshift/cron/daily/sphinx
-${OPENSHIFT_REPO_DIR}/.openshift/cron/hourly/sphinx
 
