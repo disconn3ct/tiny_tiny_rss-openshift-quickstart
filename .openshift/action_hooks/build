@@ -3,14 +3,18 @@
 # available.  Otherwise it will execute while your application is stopped
 # before the deploy step.  This script gets executed directly, so it
 # could be python, php, ruby, etc.
+echo "Entering build."
 if [ -f ${OPENSHIFT_REPO_DIR}/php/config.php ]; then
     exit 0
 fi
+echo "Configuring TTRSS: Configuration"
 cp ${OPENSHIFT_REPO_DIR}/misc/config.php ${OPENSHIFT_REPO_DIR}/php/config.php
 # Set up sphinx full-text search
+echo "Configuring Sphinx: Directories"
 mkdir -p ${OPENSHIFT_DATA_DIR}/run
 mkdir -p ${OPENSHIFT_DATA_DIR}/sphinx/var/data
 mkdir -p ${OPENSHIFT_DATA_DIR}/sphinx/etc
 # Configure sphinx for current instance
+echo "Configuring Sphinx: Configuration"
 ${OPENSHIFT_REPO_DIR}/misc/sed-sphinx.sh > ${OPENSHIFT_DATA_DIR}/sphinx/etc/sphinx.conf
 

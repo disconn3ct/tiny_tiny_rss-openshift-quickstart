@@ -14,10 +14,13 @@
 # throughout the system.
 
 #$OPENSHIFT_REPO_DIR/php/update.php --daemon &> $OPENSHIFT_PHP_LOG_DIR/rss_update.log &
-
+echo "Entering post-start-php."
+echo "Stopping sphinx."
 # Start the sphinx daemon
 ${OPENSHIFT_REPO_DIR}/.openshift/cron/daily/sphinx
 ${OPENSHIFT_REPO_DIR}/.openshift/cron/hourly/sphinx
+echo "Stopping sphinx."
 ${OPENSHIFT_REPO_DIR}/sphinx/bin/searchd --config ${OPENSHIFT_DATA_DIR}/sphinx/etc/sphinx.conf --stop
+echo "Starting sphinx."
 ${OPENSHIFT_REPO_DIR}/sphinx/bin/searchd --config ${OPENSHIFT_DATA_DIR}/sphinx/etc/sphinx.conf 
 exit 0

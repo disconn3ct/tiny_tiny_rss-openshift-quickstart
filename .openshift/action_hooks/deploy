@@ -1,16 +1,18 @@
 #!/bin/bash -ex
 # Deploy: Just before starting the application
 # Ensure db exists
-
+echo "Entering deploy."
 if [ -f ${OPENSHIFT_DATA_DIR}/.schema_deployed ]; then 
     echo "Schema already deployed."
 else 
+    echo "Deploying database schema."
     psql -h${OPENSHIFT_POSTGRESQL_DB_HOST} -U${OPENSHIFT_POSTGRESQL_DB_USERNAME} ${WOPENSHIFT_POSTGRESQL_DB_PASSWORD} -f${OPENSHIFT_REPO_DIR}/php/schema/ttrss_schema_pgsql.sql ${OPENSHIFT_APP_NAME} || exit 1
     date >> ${OPENSHIFT_DATA_DIR}/.schema_deployed
     echo "Schema deployed successfully."
 fi
 
 # Initialize the search repo
+echo "Creating search repositories."
 ${OPENSHIFT_REPO_DIR}/.openshift/cron/daily/sphinx
 ${OPENSHIFT_REPO_DIR}/.openshift/cron/hourly/sphinx
 exit 0
