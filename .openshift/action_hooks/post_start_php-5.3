@@ -14,7 +14,7 @@
 # throughout the system.
 
 echo "Entering post-start-php." | tee -a ${OPENSHIFT_PHP_LOG_DIR}/deploy.log
-if [ ${OPENSHIFT_POSTGRESQL_DB_HOST}"x" == "x"]; then
+if [ ${OPENSHIFT_POSTGRESQL_DB_HOST}"x" == "x" ]; then
 	echo "Database environment not set!" | tee -a ${OPENSHIFT_PHP_LOG_DIR}/deploy.log
 	exit 0
 fi
