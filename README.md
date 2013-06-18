@@ -1,6 +1,6 @@
 This is an OpenShift quickstart for Tiny Tiny RSS.
 
-Once [the upstream bug](https://bugzilla.redhat.com/show_bug.cgi?id=950731) is fixed, this will be much simpler.
+Once [the other upstream bug](https://bugzilla.redhat.com/show_bug.cgi?id=975540) is fixed, this will be much simpler.
 
 Creating an Openshift TT-RSS app:
 =================================
@@ -48,7 +48,13 @@ To update, just run a pull:
     
 Updating TTRSS:
 ===============
-If you want to change TTRSS versions, it is easy:
+If you want to change TTRSS versions, it is easy.
+
+First make sure the submodule is initialized in your repository:
+
+	$ git submodule update --init --recursive
+
+Then update as you like:
 
 Updating to master (latest commits):
 
