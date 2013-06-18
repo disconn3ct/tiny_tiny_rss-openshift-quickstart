@@ -50,7 +50,10 @@
 	// *****************************
 
 	define('PHP_EXECUTABLE', '/usr/bin/php');
-	// Path to PHP executable, used for various command-line tt-rss programs
+	// Path to PHP *COMMAND LINE* executable, used for various command-line tt-rss programs and
+	// update daemon. Do not try to use CGI binary here, it won't work. If you see HTTP headers
+	// being displayed while running tt-rss scripts, then most probably you are using the CGI
+	// binary. If you are unsure what to put in here, ask your hosting provider.
 
 	define('LOCK_DIRECTORY', 'lock');
 	// Directory for lockfiles, must be writable to the user you run
@@ -114,6 +117,7 @@
 	define('SPHINX_INDEX', getenv('OPENSHIFT_APP_NAME'));
 	// Index name in Sphinx configuration. You can specify multiple indexes
 	// as a comma-separated string.
+	// Example configuration files are available on tt-rss wiki.
 
 	// ***********************************
 	// *** Self-registrations by users ***
@@ -168,6 +172,9 @@
 	// These two options enable SMTP authentication when sending
 	// outgoing mail. Only used with SMTP_SERVER.
 
+	define('SMTP_SECURE', '');
+	// used to select a secure SMTP conneciton.  can be tls, ssl or enpty
+	
 	// ***************************************
 	// *** Other settings (less important) ***
 	// ***************************************
