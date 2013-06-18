@@ -1,2 +1,5 @@
 #!/bin/sh
-${OPENSHIFT_REPO_DIR}/sphinx/bin/indexer --rotate --config ${OPENSHIFT_DATA_DIR}/sphinx/etc/sphinx.conf delta &> /dev/null
+if [ -f ${OPENSHIFT_DATA_DIR}/.schema_deployed ]; then 
+   ${OPENSHIFT_REPO_DIR}/sphinx/bin/indexer --rotate --config ${OPENSHIFT_DATA_DIR}/sphinx/etc/sphinx.conf delta &> /dev/null
+fi
+exit 0
