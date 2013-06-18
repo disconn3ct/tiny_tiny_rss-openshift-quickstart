@@ -13,11 +13,23 @@
 # Application start and stop is subject to different timeouts
 # throughout the system.
 
-echo "Entering post-start-php." | tee -a ${OPENSHIFT_PHP_LOG_DIR}/deploy.log
-if [ ${OPENSHIFT_POSTGRESQL_DB_HOST}"x" == "x" ]; then
+echo "Entering post-start-postgres." | tee -a ${OPENSHIFT_PHP_LOG_DIR}/deploy.log
+
+# Ensure db exists
+if [ ${OPENSHIFT_POSTGRESQL_DB_HOST}"x" == "x"]; then
 	echo "Database environment not set!" | tee -a ${OPENSHIFT_PHP_LOG_DIR}/deploy.log
 	exit 0
 fi
+
+if [ -f ${OPENSHIFT_DATA_DIR}/.schema_deployed ]; then 
+    echo "Schema already deployed." | tee -a ${OPENSHIFT_PHP_LOG_DIR}/deploy.log
+else 
+    echo "Deploying database schema." | tee -a ${OPENSHIFT_PHP_LOG_DIR}/deploy.log
+    psql -h${OPENSHIFT_POSTGRESQL_DB_HOST} -U${OPENSHIFT_POSTGRESQL_DB_USERNAME} ${WOPENSHIFT_POSTGRESQL_DB_PASSWORD} -f${OPENSHIFT_REPO_DIR}/php/schema/ttrss_schema_pgsql.sql ${OPENSHIFT_APP_NAME} || exit 1
+    date >> ${OPENSHIFT_DATA_DIR}/.schema_deployed
+    echo "Schema deployed successfully." | tee -a ${OPENSHIFT_PHP_LOG_DIR}/deploy.log
+fi
+
 echo "Updating sphinx." | tee -a ${OPENSHIFT_PHP_LOG_DIR}/deploy.log
 # Start the sphinx daemon
 ${OPENSHIFT_REPO_DIR}/.openshift/cron/daily/sphinx
