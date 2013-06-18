@@ -11,9 +11,11 @@ if [ ${OPENSHIFT_POSTGRESQL_DB_HOST}"x" == "x"]; then
 	echo "Database environment not set!" | tee -a ${OPENSHIFT_PHP_LOG_DIR}/deploy.log
 	exit 0
 fi
-
+echo "Starting Indexer" | tee -a ${OPENSHIFT_PHP_LOG_DIR}/deploy.log
 ${OPENSHIFT_REPO_DIR}/sphinx/bin/indexer --rotate --config ${OPENSHIFT_DATA_DIR}/sphinx/etc/sphinx.conf ${OPENSHIFT_APP_NAME} 
+echo "Stopping Searchd" | tee -a ${OPENSHIFT_PHP_LOG_DIR}/deploy.log
 ${OPENSHIFT_REPO_DIR}/sphinx/bin/searchd --config ${OPENSHIFT_DATA_DIR}/sphinx/etc/sphinx.conf --stop
+echo "Starting Searchd" | tee -a ${OPENSHIFT_PHP_LOG_DIR}/deploy.log
 ${OPENSHIFT_REPO_DIR}/sphinx/bin/searchd --config ${OPENSHIFT_DATA_DIR}/sphinx/etc/sphinx.conf 
 echo "Leaving post-deploy" | tee -a ${OPENSHIFT_PHP_LOG_DIR}/deploy.log
 exit 0
