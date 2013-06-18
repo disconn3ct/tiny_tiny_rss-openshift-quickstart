@@ -31,7 +31,7 @@ Remove the existing 'php' directory:
 
 The next step is to overwrite the default application template:
 
-    $ git pull -s recursive -X theirs upstream master
+    $ git pull -s recursive --no-edit --commit -X theirs upstream master
 
 Update the app with the new code:
 
