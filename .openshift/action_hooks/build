@@ -17,4 +17,5 @@ mkdir -p ${OPENSHIFT_DATA_DIR}/sphinx/etc
 # Configure sphinx for current instance
 echo "Configuring Sphinx: Configuration" | tee -a ${OPENSHIFT_PHP_LOG_DIR}/deploy.log
 ${OPENSHIFT_REPO_DIR}/misc/sed-sphinx.sh > ${OPENSHIFT_DATA_DIR}/sphinx/etc/sphinx.conf
+echo "Leaving build." | tee -a ${OPENSHIFT_PHP_LOG_DIR}/deploy.log
 exit 0
