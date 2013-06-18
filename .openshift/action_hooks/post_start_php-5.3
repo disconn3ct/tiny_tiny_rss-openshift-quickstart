@@ -13,14 +13,17 @@
 # Application start and stop is subject to different timeouts
 # throughout the system.
 
-#$OPENSHIFT_REPO_DIR/php/update.php --daemon &> $OPENSHIFT_PHP_LOG_DIR/rss_update.log &
-echo "Entering post-start-php."
-echo "Stopping sphinx."
+echo "Entering post-start-php." | tee -a ${OPENSHIFT_PHP_LOG_DIR}/deploy.log
+if [ ${OPENSHIFT_POSTGRESQL_DB_HOST}"x" == "x"]; then
+	echo "Database environment not set!" | tee -a ${OPENSHIFT_PHP_LOG_DIR}/deploy.log
+	exit 0
+fi
+echo "Updating sphinx." | tee -a ${OPENSHIFT_PHP_LOG_DIR}/deploy.log
 # Start the sphinx daemon
 ${OPENSHIFT_REPO_DIR}/.openshift/cron/daily/sphinx
 ${OPENSHIFT_REPO_DIR}/.openshift/cron/hourly/sphinx
-echo "Stopping sphinx."
+echo "Stopping sphinx." | tee -a ${OPENSHIFT_PHP_LOG_DIR}/deploy.log
 ${OPENSHIFT_REPO_DIR}/sphinx/bin/searchd --config ${OPENSHIFT_DATA_DIR}/sphinx/etc/sphinx.conf --stop
-echo "Starting sphinx."
+echo "Starting sphinx." | tee -a ${OPENSHIFT_PHP_LOG_DIR}/deploy.log
 ${OPENSHIFT_REPO_DIR}/sphinx/bin/searchd --config ${OPENSHIFT_DATA_DIR}/sphinx/etc/sphinx.conf 
 exit 0

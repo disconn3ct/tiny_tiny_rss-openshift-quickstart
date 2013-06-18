@@ -5,9 +5,13 @@
 
 # Start the sphinx daemon
 # Make sure it gets seeded with some data
-echo "Entering post-deploy"
+echo "Entering post-deploy" | tee -a ${OPENSHIFT_PHP_LOG_DIR}/deploy.log
+if [ ${OPENSHIFT_POSTGRESQL_DB_HOST}"x" == "x"]; then
+	echo "Database environment not set!" | tee -a ${OPENSHIFT_PHP_LOG_DIR}/deploy.log
+	exit 0
+fi
 ${OPENSHIFT_REPO_DIR}/sphinx/bin/indexer --rotate --config ${OPENSHIFT_DATA_DIR}/sphinx/etc/sphinx.conf ${OPENSHIFT_APP_NAME} 
 ${OPENSHIFT_REPO_DIR}/sphinx/bin/searchd --config ${OPENSHIFT_DATA_DIR}/sphinx/etc/sphinx.conf --stop
 ${OPENSHIFT_REPO_DIR}/sphinx/bin/searchd --config ${OPENSHIFT_DATA_DIR}/sphinx/etc/sphinx.conf 
-echo "Leaving post-deploy"
+echo "Leaving post-deploy" | tee -a ${OPENSHIFT_PHP_LOG_DIR}/deploy.log
 exit 0
