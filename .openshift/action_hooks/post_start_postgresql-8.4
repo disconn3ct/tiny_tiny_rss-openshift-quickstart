@@ -35,7 +35,7 @@ echo "Updating sphinx." | tee -a ${OPENSHIFT_PHP_LOG_DIR}/deploy.log
 ${OPENSHIFT_REPO_DIR}/.openshift/cron/daily/sphinx
 ${OPENSHIFT_REPO_DIR}/.openshift/cron/hourly/sphinx
 echo "Stopping sphinx." | tee -a ${OPENSHIFT_PHP_LOG_DIR}/deploy.log
-${OPENSHIFT_REPO_DIR}/sphinx/bin/searchd --config ${OPENSHIFT_DATA_DIR}/sphinx/etc/sphinx.conf --stop || 0
+${OPENSHIFT_REPO_DIR}/sphinx/bin/searchd --config ${OPENSHIFT_DATA_DIR}/sphinx/etc/sphinx.conf --stop 
 echo "Starting sphinx." | tee -a ${OPENSHIFT_PHP_LOG_DIR}/deploy.log
 ${OPENSHIFT_REPO_DIR}/sphinx/bin/searchd --config ${OPENSHIFT_DATA_DIR}/sphinx/etc/sphinx.conf 
 echo "Leaving post-start-postgres." | tee -a ${OPENSHIFT_PHP_LOG_DIR}/deploy.log
