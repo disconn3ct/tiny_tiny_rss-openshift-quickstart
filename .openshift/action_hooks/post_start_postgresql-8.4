@@ -15,12 +15,6 @@
 
 echo "Entering post-start-postgres." | tee -a ${OPENSHIFT_PHP_LOG_DIR}/deploy.log
 
-PGHOST=${OPENSHIFT_POSTGRESQL_DB_HOST}
-PGPORT=${OPENSHIFT_POSTGRESQL_DB_PORT}
-PGUSER=${OPENSHIFT_POSTGRESQL_DB_USERNAME}
-PGPASSWORD=${OPENSHIFT_POSTGRESQL_DB_PASSWORD}
-PGDATABASE=${OPENSHIFT_APP_NAME}
-
 # Ensure db exists
 if [ ${OPENSHIFT_POSTGRESQL_DB_HOST}"x" == "x" ]; then
 	echo "Database environment not set!" | tee -a ${OPENSHIFT_PHP_LOG_DIR}/deploy.log
