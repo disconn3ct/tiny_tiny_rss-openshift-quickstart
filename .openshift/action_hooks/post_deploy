@@ -3,17 +3,10 @@
 # is deployed and started.  This script gets executed directly, so 
 # it could be python, php, ruby, etc.
 
-# Start the sphinx daemon
-# Make sure it gets seeded with some data
-
 echo "Entering post-deploy" | tee -a ${OPENSHIFT_PHP_LOG_DIR}/deploy.log
-if [ -z ${OPENSHIFT_POSTGRESQL_DB_HOST} ]; then
-	echo "Database environment not set!" | tee -a ${OPENSHIFT_PHP_LOG_DIR}/deploy.log
-	exit 0
-fi
 
 # Ensure db exists
-if [ ${OPENSHIFT_POSTGRESQL_DB_HOST}"x" == "x" ]; then
+if [ -z ${OPENSHIFT_POSTGRESQL_DB_HOST} ]; then
 	echo "Database environment not set!" | tee -a ${OPENSHIFT_PHP_LOG_DIR}/deploy.log
 	exit 0
 fi
@@ -37,7 +30,6 @@ echo "Stopping sphinx." | tee -a ${OPENSHIFT_PHP_LOG_DIR}/deploy.log
 ${OPENSHIFT_REPO_DIR}/sphinx/bin/searchd --config ${OPENSHIFT_DATA_DIR}/sphinx/etc/sphinx.conf --stop 
 echo "Starting sphinx." | tee -a ${OPENSHIFT_PHP_LOG_DIR}/deploy.log
 ${OPENSHIFT_REPO_DIR}/sphinx/bin/searchd --config ${OPENSHIFT_DATA_DIR}/sphinx/etc/sphinx.conf 
-echo "Leaving post-start-postgres." | tee -a ${OPENSHIFT_PHP_LOG_DIR}/deploy.log
 
 echo "Starting Indexer" | tee -a ${OPENSHIFT_PHP_LOG_DIR}/deploy.log
 ${OPENSHIFT_REPO_DIR}/sphinx/bin/indexer --rotate --config ${OPENSHIFT_DATA_DIR}/sphinx/etc/sphinx.conf ${OPENSHIFT_APP_NAME} 
