@@ -11,6 +11,34 @@ if [ -z ${OPENSHIFT_POSTGRESQL_DB_HOST} ]; then
 	echo "Database environment not set!" | tee -a ${OPENSHIFT_PHP_LOG_DIR}/deploy.log
 	exit 0
 fi
+
+# Ensure db exists
+if [ ${OPENSHIFT_POSTGRESQL_DB_HOST}"x" == "x" ]; then
+	echo "Database environment not set!" | tee -a ${OPENSHIFT_PHP_LOG_DIR}/deploy.log
+	exit 0
+fi
+
+if [ -f ${OPENSHIFT_DATA_DIR}/.schema_deployed ]; then 
+    echo "Schema already deployed." | tee -a ${OPENSHIFT_PHP_LOG_DIR}/deploy.log
+else 
+    echo "Creating database." | tee -a ${OPENSHIFT_PHP_LOG_DIR}/deploy.log
+    createdb -w ${OPENSHIFT_APP_NAME}
+    echo "Deploying database schema." | tee -a ${OPENSHIFT_PHP_LOG_DIR}/deploy.log
+    psql -w -f ${OPENSHIFT_REPO_DIR}/php/schema/ttrss_schema_pgsql.sql ${OPENSHIFT_APP_NAME} && \
+    date >> ${OPENSHIFT_DATA_DIR}/.schema_deployed && \
+    echo "Schema deployed successfully." | tee -a ${OPENSHIFT_PHP_LOG_DIR}/deploy.log
+fi
+
+echo "Updating sphinx." | tee -a ${OPENSHIFT_PHP_LOG_DIR}/deploy.log
+# Start the sphinx daemon
+${OPENSHIFT_REPO_DIR}/.openshift/cron/daily/sphinx
+${OPENSHIFT_REPO_DIR}/.openshift/cron/hourly/sphinx
+echo "Stopping sphinx." | tee -a ${OPENSHIFT_PHP_LOG_DIR}/deploy.log
+${OPENSHIFT_REPO_DIR}/sphinx/bin/searchd --config ${OPENSHIFT_DATA_DIR}/sphinx/etc/sphinx.conf --stop 
+echo "Starting sphinx." | tee -a ${OPENSHIFT_PHP_LOG_DIR}/deploy.log
+${OPENSHIFT_REPO_DIR}/sphinx/bin/searchd --config ${OPENSHIFT_DATA_DIR}/sphinx/etc/sphinx.conf 
+echo "Leaving post-start-postgres." | tee -a ${OPENSHIFT_PHP_LOG_DIR}/deploy.log
+
 echo "Starting Indexer" | tee -a ${OPENSHIFT_PHP_LOG_DIR}/deploy.log
 ${OPENSHIFT_REPO_DIR}/sphinx/bin/indexer --rotate --config ${OPENSHIFT_DATA_DIR}/sphinx/etc/sphinx.conf ${OPENSHIFT_APP_NAME} 
 echo "Stopping Searchd" | tee -a ${OPENSHIFT_PHP_LOG_DIR}/deploy.log
@@ -18,6 +46,4 @@ ${OPENSHIFT_REPO_DIR}/sphinx/bin/searchd --config ${OPENSHIFT_DATA_DIR}/sphinx/e
 echo "Starting Searchd" | tee -a ${OPENSHIFT_PHP_LOG_DIR}/deploy.log
 ${OPENSHIFT_REPO_DIR}/sphinx/bin/searchd --config ${OPENSHIFT_DATA_DIR}/sphinx/etc/sphinx.conf 
 echo "Leaving post-deploy" | tee -a ${OPENSHIFT_PHP_LOG_DIR}/deploy.log
-#echo "Manually starting post-start-postgresql" | tee -a ${OPENSHIFT_PHP_LOG_DIR}/deploy.log
-#exec ${OPENSHIFT_REPO_DIR}/.openshift/action_hooks/post_start_postgresql-8.4
 exit 0
