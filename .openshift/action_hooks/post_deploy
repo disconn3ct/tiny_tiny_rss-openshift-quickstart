@@ -7,7 +7,7 @@
 # Make sure it gets seeded with some data
 
 echo "Entering post-deploy" | tee -a ${OPENSHIFT_PHP_LOG_DIR}/deploy.log
-if [ ${OPENSHIFT_POSTGRESQL_DB_HOST}"x" == "x"]; then
+if [ ${OPENSHIFT_POSTGRESQL_DB_HOST}"x" == "x" ]; then
 	echo "Database environment not set!" | tee -a ${OPENSHIFT_PHP_LOG_DIR}/deploy.log
 	exit 0
 fi
