@@ -39,7 +39,9 @@ To update, just run a pull from my repo and push into the Openshift instance:
 
     $ git pull upstream master
     $ git push
-    
+
+This will pull in any changes I've made, such as new release versions of TTRSS. It should not affect your existing data. It does take some time though, as Openshift goes through a complete application restart.
+
 Updating TTRSS:
 ===============
 If you want to change TTRSS versions without waiting for me, it is easy.
@@ -52,12 +54,21 @@ Then update as you like:
 
 Updating to master (latest commits):
 
+The first time, you have to set it to master:
+
+    $ cd php
+    $ git checkout master
+    
+After that, all that is necessary is:
+
     $ cd php
     $ git pull
     $ cd ..
+    $ git add php
+    $ git commit -m "update to lastest ttrss"
     $ git push
 
-Updating to a specific tag/release:
+Updating to a specific tag/release (1.8 in this example):
 
     $ cd php
     $ git fetch
