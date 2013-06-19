@@ -18,6 +18,6 @@ ${OPENSHIFT_REPO_DIR}/sphinx/bin/searchd --config ${OPENSHIFT_DATA_DIR}/sphinx/e
 echo "Starting Searchd" | tee -a ${OPENSHIFT_PHP_LOG_DIR}/deploy.log
 ${OPENSHIFT_REPO_DIR}/sphinx/bin/searchd --config ${OPENSHIFT_DATA_DIR}/sphinx/etc/sphinx.conf 
 echo "Leaving post-deploy" | tee -a ${OPENSHIFT_PHP_LOG_DIR}/deploy.log
-echo "Manually starting post-start-postgresql" | tee -a ${OPENSHIFT_PHP_LOG_DIR}/deploy.log
-exec ${OPENSHIFT_REPO_DIR}/.openshift/action_hooks/post_start_postgresql-8.4
+#echo "Manually starting post-start-postgresql" | tee -a ${OPENSHIFT_PHP_LOG_DIR}/deploy.log
+#exec ${OPENSHIFT_REPO_DIR}/.openshift/action_hooks/post_start_postgresql-8.4
 exit 0
