@@ -8,7 +8,7 @@ if [ ! -f ${OPENSHIFT_REPO_DIR}/php/config.php ]; then
   echo "Configuring TTRSS: Configuration" | tee -a ${OPENSHIFT_PHP_LOG_DIR}/deploy.log
   cp ${OPENSHIFT_REPO_DIR}/misc/config.php ${OPENSHIFT_REPO_DIR}/php/config.php
 fi
-if [ ! -l ${OPENSHIFT_REPO_DIR}/php/g2ttrss ]; then
+if [ ! -L ${OPENSHIFT_REPO_DIR}/php/g2ttrss ]; then
   echo "Configuring TTRSS: G2TTRSS" | tee -a ${OPENSHIFT_PHP_LOG_DIR}/deploy.log
   ln -sf ${OPENSHIFT_REPO_DIR}/php/g2ttrss ${OPENSHIFT_REPO_DIR}/misc/g2ttrss
 fi
