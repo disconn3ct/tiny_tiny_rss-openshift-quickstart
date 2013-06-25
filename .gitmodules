@@ -1,3 +1,6 @@
 [submodule "php"]
 	path = php
 	url = https://github.com/gothfox/Tiny-Tiny-RSS.git
+[submodule "misc/g2ttrss"]
+	path = misc/g2ttrss
+	url = https://github.com/g2ttrss/g2ttrss-mobile.git
