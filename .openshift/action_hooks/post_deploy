@@ -36,6 +36,9 @@ if [ ! -d ${OPENSHIFT_DATA_DIR}/run ]; then
 fi
 
 # Start the sphinx daemon
+
+# Seed the initial data
+${OPENSHIFT_REPO_DIR}/.openshift/cron/minutely/update-feeds
 ${OPENSHIFT_REPO_DIR}/.openshift/cron/daily/sphinx
 ${OPENSHIFT_REPO_DIR}/.openshift/cron/hourly/sphinx
 echo "Stopping sphinx." | tee -a ${OPENSHIFT_PHP_LOG_DIR}/deploy.log
@@ -45,8 +48,6 @@ ${OPENSHIFT_REPO_DIR}/sphinx/bin/searchd --config ${OPENSHIFT_DATA_DIR}/sphinx/e
 
 echo "Starting Indexer" | tee -a ${OPENSHIFT_PHP_LOG_DIR}/deploy.log
 ${OPENSHIFT_REPO_DIR}/sphinx/bin/indexer --rotate --config ${OPENSHIFT_DATA_DIR}/sphinx/etc/sphinx.conf ${OPENSHIFT_APP_NAME} 
-echo "Stopping Searchd" | tee -a ${OPENSHIFT_PHP_LOG_DIR}/deploy.log
-${OPENSHIFT_REPO_DIR}/sphinx/bin/searchd --config ${OPENSHIFT_DATA_DIR}/sphinx/etc/sphinx.conf --stop
 echo "Starting Searchd" | tee -a ${OPENSHIFT_PHP_LOG_DIR}/deploy.log
 ${OPENSHIFT_REPO_DIR}/sphinx/bin/searchd --config ${OPENSHIFT_DATA_DIR}/sphinx/etc/sphinx.conf 
 echo "Leaving post-deploy" | tee -a ${OPENSHIFT_PHP_LOG_DIR}/deploy.log
