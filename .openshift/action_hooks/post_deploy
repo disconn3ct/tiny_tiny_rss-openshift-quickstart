@@ -23,6 +23,18 @@ else
 fi
 
 echo "Updating sphinx." | tee -a ${OPENSHIFT_PHP_LOG_DIR}/deploy.log
+# Set up sphinx full-text search
+if [ ! -d ${OPENSHIFT_DATA_DIR}/run ]; then
+  echo "***ERROR***: Should have completed during deploy hook."
+  echo "Configuring Sphinx: Directories" | tee -a ${OPENSHIFT_PHP_LOG_DIR}/deploy.log
+  mkdir -p ${OPENSHIFT_DATA_DIR}/run
+  mkdir -p ${OPENSHIFT_DATA_DIR}/sphinx/var/data
+  mkdir -p ${OPENSHIFT_DATA_DIR}/sphinx/etc
+  # Configure sphinx for current instance
+  echo "Configuring Sphinx: Configuration" | tee -a ${OPENSHIFT_PHP_LOG_DIR}/deploy.log
+  ${OPENSHIFT_REPO_DIR}/misc/sed-sphinx.sh > ${OPENSHIFT_DATA_DIR}/sphinx/etc/sphinx.conf
+fi
+
 # Start the sphinx daemon
 ${OPENSHIFT_REPO_DIR}/.openshift/cron/daily/sphinx
 ${OPENSHIFT_REPO_DIR}/.openshift/cron/hourly/sphinx
