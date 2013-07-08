@@ -7,7 +7,6 @@ echo "Entering build." | tee -a ${OPENSHIFT_PHP_LOG_DIR}/deploy.log
 if [ -f ${OPENSHIFT_REPO_DIR}/php/config.php ]; then
     exit 0
 fi
-echo "Configuring TTRSS: Configuration" | tee -a ${OPENSHIFT_PHP_LOG_DIR}/deploy.log
 if [ ! -f ${OPENSHIFT_REPO_DIR}/php/config.php ]; then
     echo "Configuring TTRSS: Configuration" | tee -a ${OPENSHIFT_PHP_LOG_DIR}/deploy.log
     cp ${OPENSHIFT_REPO_DIR}/misc/config.php ${OPENSHIFT_REPO_DIR}/php/config.php
