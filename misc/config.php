@@ -111,7 +111,7 @@
 	// Enable fulltext search using Sphinx (http://www.sphinxsearch.com)
 	// Please see http://tt-rss.org/wiki/SphinxSearch for more information.
 
-    define('SPHINX_SERVER', getenv('OPENSHIFT_INTERNAL_IP').":15000");
+    define('SPHINX_SERVER', getenv('OPENSHIFT_PHP_IP').":15000");
 	// Hostname:port combination for the Sphinx server.
 
 	define('SPHINX_INDEX', getenv('OPENSHIFT_APP_NAME'));
