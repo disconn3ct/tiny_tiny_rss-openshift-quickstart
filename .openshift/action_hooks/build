@@ -8,14 +8,23 @@ if [ -f ${OPENSHIFT_REPO_DIR}/php/config.php ]; then
     exit 0
 fi
 echo "Configuring TTRSS: Configuration" | tee -a ${OPENSHIFT_PHP_LOG_DIR}/deploy.log
-cp ${OPENSHIFT_REPO_DIR}/misc/config.php ${OPENSHIFT_REPO_DIR}/php/config.php
+if [ ! -f ${OPENSHIFT_REPO_DIR}/php/config.php ]; then
+    echo "Configuring TTRSS: Configuration" | tee -a ${OPENSHIFT_PHP_LOG_DIR}/deploy.log
+    cp ${OPENSHIFT_REPO_DIR}/misc/config.php ${OPENSHIFT_REPO_DIR}/php/config.php
+else
+    echo "***WARNING***: Be sure to update \$OPENSHIFT_REPO_DIR/php/config.php with content" | tee -a ${OPENSHIFT_PHP_LOG_DIR}/deploy.log
+    echo "***WARNING***: from \$OPENSHIFT_REPO_DIR/misc/config.php" | tee -a ${OPENSHIFT_PHP_LOG_DIR}/deploy.log
+fi
 # Set up sphinx full-text search
-echo "Configuring Sphinx: Directories" | tee -a ${OPENSHIFT_PHP_LOG_DIR}/deploy.log
-mkdir -p ${OPENSHIFT_DATA_DIR}/run
-mkdir -p ${OPENSHIFT_DATA_DIR}/sphinx/var/data
-mkdir -p ${OPENSHIFT_DATA_DIR}/sphinx/etc
+if [ ! -d ${OPENSHIFT_DATA_DIR}/run ]; then
+  echo "Configuring Sphinx: Directories" | tee -a ${OPENSHIFT_PHP_LOG_DIR}/deploy.log
+  mkdir -p ${OPENSHIFT_DATA_DIR}/run
+  mkdir -p ${OPENSHIFT_DATA_DIR}/sphinx/var/data
+  mkdir -p ${OPENSHIFT_DATA_DIR}/sphinx/etc
+fi
 # Configure sphinx for current instance
 echo "Configuring Sphinx: Configuration" | tee -a ${OPENSHIFT_PHP_LOG_DIR}/deploy.log
 ${OPENSHIFT_REPO_DIR}/misc/sed-sphinx.sh > ${OPENSHIFT_DATA_DIR}/sphinx/etc/sphinx.conf
+
 echo "Leaving build." | tee -a ${OPENSHIFT_PHP_LOG_DIR}/deploy.log
 exit 0
