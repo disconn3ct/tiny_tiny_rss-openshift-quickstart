@@ -50,10 +50,11 @@
 	// *****************************
 
 	define('PHP_EXECUTABLE', '/usr/bin/php');
-	// Path to PHP *COMMAND LINE* executable, used for various command-line tt-rss programs and
-	// update daemon. Do not try to use CGI binary here, it won't work. If you see HTTP headers
-	// being displayed while running tt-rss scripts, then most probably you are using the CGI
-	// binary. If you are unsure what to put in here, ask your hosting provider.
+	// Path to PHP *COMMAND LINE* executable, used for various command-line tt-rss 
+	// programs and update daemon. Do not try to use CGI binary here, it won't work. 
+	// If you see HTTP headers being displayed while running tt-rss scripts, 
+	// then most probably you are using the CGI binary. If you are unsure what to 
+	// put in here, ask your hosting provider.
 
 	define('LOCK_DIRECTORY', 'lock');
 	// Directory for lockfiles, must be writable to the user you run
@@ -173,7 +174,8 @@
 	// outgoing mail. Only used with SMTP_SERVER.
 
 	define('SMTP_SECURE', '');
-	// used to select a secure SMTP conneciton.  can be tls, ssl or enpty
+	// Used to select a secure SMTP connection. Allowed values: ssl, tls,
+	// or empty.
 	
 	// ***************************************
 	// *** Other settings (less important) ***
