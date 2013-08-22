@@ -1,0 +1,12 @@
+#!/bin/sh
+
+# Daily manual full-vacuum of the database to work around an Openshift bug
+# causing autovacuum not to work. 
+# See https://bugzilla.redhat.com/show_bug.cgi?id=849428 which is a duplicate
+# of the non-accessible https://bugzilla.redhat.com/show_bug.cgi?id=806016
+echo "Vacuuming database..."
+vacuumdb -f --host=$OPENSHIFT_POSTGRESQL_DB_HOST --port=$OPENSHIFT_POSTGRESQL_DB_PORT
+returnvalue=$?
+echo "Vacuuming ended"
+
+exit $returnvalue
