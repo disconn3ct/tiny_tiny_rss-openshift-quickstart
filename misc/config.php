@@ -20,7 +20,7 @@
 
 	define('SELF_URL_PATH', 'https://'.getenv('OPENSHIFT_APP_DNS'));
 	// Full URL of your tt-rss installation. This should be set to the
-	// location of tt-rss directory, e.g. http://yourserver/tt-rss/
+	// location of tt-rss directory, e.g. http://example.org/tt-rss/
 	// You need to set this option correctly otherwise several features
 	// including PUSH, bookmarklets and browser integration will not work properly.
 
