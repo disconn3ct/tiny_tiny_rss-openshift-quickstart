@@ -115,7 +115,7 @@
     define('SPHINX_SERVER', getenv('OPENSHIFT_PHP_IP').":15000");
 	// Hostname:port combination for the Sphinx server.
 
-	define('SPHINX_INDEX', getenv('OPENSHIFT_APP_NAME'));
+	define('SPHINX_INDEX', getenv('OPENSHIFT_APP_NAME') . ",delta");
 	// Index name in Sphinx configuration. You can specify multiple indexes
 	// as a comma-separated string.
 	// Example configuration files are available on tt-rss wiki.
