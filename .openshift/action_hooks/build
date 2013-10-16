@@ -14,6 +14,18 @@ else
     echo "***WARNING***: Be sure to update \$OPENSHIFT_REPO_DIR/php/config.php with content" | tee -a ${OPENSHIFT_PHP_LOG_DIR}/deploy.log
     echo "***WARNING***: from \$OPENSHIFT_REPO_DIR/misc/config.php" | tee -a ${OPENSHIFT_PHP_LOG_DIR}/deploy.log
 fi
+
+# Set up various cache directories
+if [ ! -d ${OPENSHIFT_DATA_DIR}/ttrss ]; then
+  echo "Configuring tt-rss cache directories"| tee -a ${OPENSHIFT_PHP_LOG_DIR}/deploy.log
+  mkdir -p ${OPENSHIFT_DATA_DIR}/ttrss
+  cp -r ${OPENSHIFT_REPO_DIR}/php/{cache,lock} ${OPENSHIFT_DATA_DIR}/ttrss/
+  mv ${OPENSHIFT_REPO_DIR}/php/feed-icons ${OPENSHIFT_DATA_DIR}/ttrss/
+else
+  rm -rf ${OPENSHIFT_REPO_DIR}/php/feed-icons
+fi
+ln -sf ${OPENSHIFT_DATA_DIR}/ttrss/feed-icons ${OPENSHIFT_REPO_DIR}/php/feed-icons
+
 # Set up sphinx full-text search
 if [ ! -d ${OPENSHIFT_DATA_DIR}/run ]; then
   echo "Configuring Sphinx: Directories" | tee -a ${OPENSHIFT_PHP_LOG_DIR}/deploy.log
