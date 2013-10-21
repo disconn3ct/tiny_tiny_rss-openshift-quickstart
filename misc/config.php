@@ -56,11 +56,11 @@
 	// then most probably you are using the CGI binary. If you are unsure what to 
 	// put in here, ask your hosting provider.
 
-	define('LOCK_DIRECTORY', 'lock');
+	define('LOCK_DIRECTORY', getenv(OPENSHIFT_DATA_DIR) . '/ttrss/lock');
 	// Directory for lockfiles, must be writable to the user you run
 	// daemon process or cronjobs under.
 
-	define('CACHE_DIR', 'cache');
+	define('CACHE_DIR', getenv(OPENSHIFT_DATA_DIR) . '/ttrss/cache'); 
 	// Local cache directory for RSS feed content.
 
 	define('ICONS_DIR', "feed-icons");
