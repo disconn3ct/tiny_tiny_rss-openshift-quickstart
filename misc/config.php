@@ -183,12 +183,12 @@
 
 	define('CHECK_FOR_NEW_VERSION', true);
 	// Check for new versions of tt-rss automatically.
-	
+
 	define('DETECT_ARTICLE_LANGUAGE', false);
 	// Detect article language when updating feeds, presently this is only
-    	// used for hyphenation. This may increase amount of CPU time used by
-    	// update processes, disable if necessary (i.e. you are being billed
-    	// for CPU time).
+	// used for hyphenation. This may increase amount of CPU time used by 
+	// update processes, disable if necessary (i.e. you are being billed
+	// for CPU time).
 
 	define('ENABLE_GZIP_OUTPUT', true);
 	// Selectively gzip output to improve wire performance. This requires
@@ -217,4 +217,3 @@
 	// if necessary (after migrating all new options from this file).
 
 	// vim:ft=php
-?>
