@@ -1,3 +1,3 @@
 [submodule "php"]
 	path = php
-	url = https://github.com/gothfox/Tiny-Tiny-RSS.git
+	url = https://tt-rss.org/gitlab/fox/tt-rss.git
