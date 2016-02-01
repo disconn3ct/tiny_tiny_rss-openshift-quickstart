@@ -7,12 +7,12 @@ To create an Openshift TT-RSS instance:
 
 **Feel free to replace 'ttrss' with a different name.**
 
-    $ rhc app create ttrss php-5.4 postgresql-8.4 cron-1.4 --from-code=https://github.com/disconn3ct/tiny_tiny_rss-openshift-quickstart.git --timeout=9999
+    $ rhc app create ttrss php-5.4 postgresql-9.2 cron-1.4 --from-code=https://github.com/disconn3ct/tiny_tiny_rss-openshift-quickstart.git --timeout=9999
     
     Application Options
     -------------------
       Namespace:  spaces
-      Cartridges: php-5.4, postgresql-8.4, cron-1.4
+      Cartridges: php-5.4, postgresql-9.2, cron-1.4
       Gear Size:  default
       Scaling:    no
 
