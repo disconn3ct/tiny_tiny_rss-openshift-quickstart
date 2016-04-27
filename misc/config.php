@@ -108,7 +108,7 @@
 	// *** Sphinx search plugin ***
 	// ****************************
 
-    define('SPHINX_SERVER', getenv('OPENSHIFT_PHP_IP').":15000");
+	define('SPHINX_SERVER', getenv('OPENSHIFT_PHP_IP').":15000");
 	// Hostname:port combination for the Sphinx server.
 
 	define('SPHINX_INDEX', getenv('OPENSHIFT_APP_NAME') . ",delta");
@@ -141,13 +141,6 @@
 	// Default lifetime of a session (e.g. login) cookie. In seconds, 
 	// 0 means cookie will be deleted when browser closes.
 
-	define('SESSION_CHECK_ADDRESS', 1);
-	// Check client IP address when validating session:
-	// 0 - disable checking
-	// 1 - check first 3 octets of an address (recommended)
-	// 2 - check first 2 octets of an address
-	// 3 - check entire address
-
 	// *********************************
 	// *** Email and digest settings ***
 	// *********************************
@@ -177,14 +170,8 @@
 	// *** Other settings (less important) ***
 	// ***************************************
 
-	define('CHECK_FOR_NEW_VERSION', true);
-	// Check for new versions of tt-rss automatically.
-
-	define('DETECT_ARTICLE_LANGUAGE', false);
-	// Detect article language when updating feeds, presently this is only
-	// used for hyphenation. This may increase amount of CPU time used by 
-	// update processes, disable if necessary (i.e. you are being billed
-	// for CPU time).
+	define('CHECK_FOR_UPDATES', true);
+	// Check for updates automatically if running Git version
 
 	define('ENABLE_GZIP_OUTPUT', true);
 	// Selectively gzip output to improve wire performance. This requires
